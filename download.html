@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Clone — Ascensão Company</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg: #0a0a0a;
+      --card: #111;
+      --border: #262626;
+      --primary: #dc2626;
+      --fg: #fafafa;
+      --muted: #a3a3a3;
+      --green: #22c55e;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    h1 span { color: var(--primary); }
+
+    .subtitle {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .file-list {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .file-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.875rem;
+    }
+
+    .file-list li:last-child { border-bottom: none; }
+
+    .file-icon {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .file-icon.html { background: #dc262630; color: var(--primary); }
+    .file-icon.css { background: #3b82f630; color: #3b82f6; }
+    .file-icon.js { background: #eab30830; color: #eab308; }
+    .file-icon.img { background: #22c55e30; color: var(--green); }
+
+    .file-name { flex: 1; }
+    .file-size { color: var(--muted); font-size: 0.75rem; }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .status.success { background: #22c55e15; border: 1px solid #22c55e30; color: var(--green); }
+    .status.warning { background: #eab30815; border: 1px solid #eab30830; color: #eab308; }
+    .status.info { background: #3b82f615; border: 1px solid #3b82f630; color: #3b82f6; }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .status.success .status-dot { background: var(--green); }
+    .status.warning .status-dot { background: #eab308; }
+    .status.info .status-dot { background: #3b82f6; }
+
+    .btn-download {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      width: 100%;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--primary), #991b1b);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+    }
+
+    .btn-download:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(220, 38, 38, 0.4);
+    }
+
+    .btn-download:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-download svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin-top: 1rem;
+      overflow: hidden;
+      display: none;
+    }
+
+    .progress-bar .fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 2px;
+      width: 0%;
+      transition: width 0.3s;
+    }
+
+    .hash-info {
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      word-break: break-all;
+      background: #0a0a0a;
+      padding: 0.75rem;
+      border-radius: 6px;
+      margin-top: 1rem;
+    }
+
+    .hash-label {
+      color: var(--primary);
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      margin-bottom: 0.25rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .spinner {
+      width: 1.25rem;
+      height: 1.25rem;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Download <span>Clone</span></h1>
+    <p class="subtitle">Ascensão Company — Clone Local Completo</p>
+
+    <div class="card">
+      <ul class="file-list" id="file-list">
+        <li>
+          <div class="file-icon html">HTML</div>
+          <span class="file-name">legacy/original-site/index.html</span>
+          <span class="file-size" id="size-html">—</span>
+        </li>
+        <li>
+          <div class="file-icon css">CSS</div>
+          <span class="file-name">legacy/original-site/style.css</span>
+          <span class="file-size" id="size-css">—</span>
+        </li>
+        <li>
+          <div class="file-icon js">JS</div>
+          <span class="file-name">legacy/original-site/particles.js</span>
+          <span class="file-size" id="size-particles">—</span>
+        </li>
+        <li>
+          <div class="file-icon js">JS</div>
+          <span class="file-name">legacy/original-site/animations.js</span>
+          <span class="file-size" id="size-animations">—</span>
+        </li>
+        <li>
+          <div class="file-icon img">IMG</div>
+          <span class="file-name">legacy/original-site/assets/founders-Butfy_T2.jpeg</span>
+          <span class="file-size" id="size-founders">—</span>
+        </li>
+        <li>
+          <div class="file-icon img">IMG</div>
+          <span class="file-name">legacy/original-site/assets/logo-ascensao-DQUHq5Wm.png</span>
+          <span class="file-size" id="size-logo">—</span>
+        </li>
+        <li>
+          <div class="file-icon img">IMG</div>
+          <span class="file-name">legacy/original-site/assets/whatsapp-3d-CHW-Y5IC.webp</span>
+          <span class="file-size" id="size-whatsapp">—</span>
+        </li>
+      </ul>
+
+      <div id="status" class="status info">
+        <div class="status-dot"></div>
+        <span>Pronto para gerar o ZIP</span>
+      </div>
+
+      <button id="btn-download" class="btn-download" onclick="generateZip()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" x2="12" y1="15" y2="3"></line>
+        </svg>
+        GERAR E BAIXAR ZIP
+      </button>
+
+      <div class="progress-bar" id="progress-bar">
+        <div class="fill" id="progress-fill"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="hash-label">SHA-256 Hash do Clone</div>
+      <div class="hash-info" id="hash-output">Hash será calculado ao gerar o ZIP...</div>
+    </div>
+  </div>
+
+  <!-- JSZip via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script>
+    // File paths relative to this download.html
+    const FILES = [
+      { path: 'legacy/original-site/index.html', sizeId: 'size-html' },
+      { path: 'legacy/original-site/style.css', sizeId: 'size-css' },
+      { path: 'legacy/original-site/particles.js', sizeId: 'size-particles' },
+      { path: 'legacy/original-site/animations.js', sizeId: 'size-animations' },
+      { path: 'legacy/original-site/assets/founders-Butfy_T2.jpeg', sizeId: 'size-founders', binary: true },
+      { path: 'legacy/original-site/assets/logo-ascensao-DQUHq5Wm.png', sizeId: 'size-logo', binary: true },
+      { path: 'legacy/original-site/assets/whatsapp-3d-CHW-Y5IC.webp', sizeId: 'size-whatsapp', binary: true }
+    ];
+
+    function formatSize(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+    }
+
+    function setStatus(type, message) {
+      const el = document.getElementById('status');
+      el.className = 'status ' + type;
+      el.innerHTML = '<div class="status-dot"></div><span>' + message + '</span>';
+    }
+
+    function setProgress(pct) {
+      const bar = document.getElementById('progress-bar');
+      const fill = document.getElementById('progress-fill');
+      bar.style.display = 'block';
+      fill.style.width = pct + '%';
+    }
+
+    async function computeSHA256(data) {
+      const buffer = typeof data === 'string' 
+        ? new TextEncoder().encode(data)
+        : data;
+      const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function fetchFile(path, binary) {
+      const response = await fetch('./' + path);
+      if (!response.ok) throw new Error('Failed to fetch ' + path);
+      if (binary) {
+        return await response.arrayBuffer();
+      }
+      return await response.text();
+    }
+
+    async function generateZip() {
+      const btn = document.getElementById('btn-download');
+      btn.disabled = true;
+      btn.innerHTML = '<div class="spinner"></div> GERANDO ZIP...';
+
+      try {
+        const zip = new JSZip();
+        const folder = zip.folder('ascensao-company-clone');
+
+        setStatus('info', 'Coletando arquivos...');
+        setProgress(0);
+
+        let allContent = '';
+
+        for (let i = 0; i < FILES.length; i++) {
+          const file = FILES[i];
+          setStatus('info', 'Baixando ' + file.path + '...');
+          setProgress(Math.round(((i + 1) / FILES.length) * 70));
+
+          try {
+            const content = await fetchFile(file.path, file.binary);
+            
+            if (file.binary) {
+              folder.file(file.path, content);
+              document.getElementById(file.sizeId).textContent = formatSize(content.byteLength);
+            } else {
+              folder.file(file.path, content);
+              allContent += content;
+              document.getElementById(file.sizeId).textContent = formatSize(new Blob([content]).size);
+            }
+          } catch (err) {
+            console.warn('Could not fetch ' + file.path + ':', err.message);
+            document.getElementById(file.sizeId).textContent = '❌';
+          }
+        }
+
+        // Also include verify.js and download.html
+        try {
+          const verifyContent = await fetchFile('verify.js', false);
+          folder.file('verify.js', verifyContent);
+        } catch(e) { /* optional */ }
+
+        setStatus('info', 'Gerando arquivo ZIP...');
+        setProgress(85);
+
+        const blob = await zip.generateAsync({ 
+          type: 'blob',
+          compression: 'DEFLATE',
+          compressionOptions: { level: 9 }
+        }, function(metadata) {
+          setProgress(85 + Math.round(metadata.percent * 0.15));
+        });
+
+        // Compute hash
+        const hashArrayBuffer = await blob.arrayBuffer();
+        const hash = await computeSHA256(hashArrayBuffer);
+        document.getElementById('hash-output').textContent = hash;
+
+        setProgress(100);
+        setStatus('success', 'ZIP gerado com sucesso! (' + formatSize(blob.size) + ')');
+
+        // Trigger download
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'ascensao-company-clone.zip';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg> ZIP BAIXADO!';
+
+        // Re-enable after 3s
+        setTimeout(function() {
+          btn.disabled = false;
+          btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg> GERAR E BAIXAR ZIP';
+        }, 3000);
+
+      } catch (err) {
+        setStatus('warning', 'Erro: ' + err.message);
+        btn.disabled = false;
+        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg> TENTAR NOVAMENTE';
+      }
+    }
+  </script>
+</body>
+</html>
