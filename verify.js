@@ -1,5 +1,5 @@
 /* ============================================
-   VERIFY.JS — Hash comparison script
+   VERIFY.JS  Hash comparison script
    Compares local clone content against the 
    rendered DOM scraped from Firecrawl.
    
@@ -47,7 +47,7 @@ function normalizeHTML(html) {
   n = n.replace(/<div role="region"[\s\S]*?<\/ol><\/div>/g, '');
   n = n.replace(/<section aria-label="Notifications[\s\S]*?<\/section>/g, '');
 
-  // Remove iframe src (they differ — cid: vs about:blank)
+  // Remove iframe src (they differ  cid: vs about:blank)
   n = n.replace(/src="[^"]*"/g, '');
 
   // Remove data attributes
@@ -139,49 +139,49 @@ const EXPECTED_CONTENT = {
     'Por que somos diferentes',
     'Atuação completa na jornada de compra',
     'Foco em resultado real',
-    'Estratégia profunda',
+    'Estratgia profunda',
     'Melhoria do atendimento comercial'
   ],
   'depoimentos': [
-    'Histórias reais de resultados',
+    'Histrias reais de resultados',
     'Depoimento 1',
     'Depoimento 2',
     'Depoimento 3'
   ],
   'servicos': [
     'Nossos Serviços',
-    'Edição de Vídeos Profissionais',
-    'Gestão de Tráfego Pago',
-    'Agentes de Inteligência Artificial',
+    'Edio de Vdeos Profissionais',
+    'Gestáo de Trfego Pago',
+    'Agentes de Inteligncia Artificial',
     'Desenvolvimento de Sites',
-    'Gestão Estratégica de Social Media'
+    'Gestáo Estratgica de Social Media'
   ],
   'comparativo': [
     'Quais profissionais você precisa',
-    'Líder de Vendas',
-    'R$ 5.000,00/mês',
+    'Lder de Vendas',
+    'R$ 5.000,00/ms',
     'Redator de Publicidade',
-    'R$ 3.500,00/mês',
-    'Gestor de Tráfego',
-    'R$ 2.500,00/mês',
-    'Editor de Vídeo',
+    'R$ 3.500,00/ms',
+    'Gestor de Trfego',
+    'R$ 2.500,00/ms',
+    'Editor de Vdeo',
     'Gestor de Projetos',
-    'R$ 7.500,00/mês',
-    'QUERO MAIS INFORMAÇÕES'
+    'R$ 7.500,00/ms',
+    'QUERO MAIS INFORMAES'
   ],
   'agente-ia': [
-    'Agente de Inteligência Artificial',
+    'Agente de Inteligncia Artificial',
     'DESTAQUE ESPECIAL',
     'Economia real para sua empresa',
-    'Contratar novos funcionários',
-    'Atendimento 24/7 instantâneo',
+    'Contratar novos funcionrios',
+    'Atendimento 24/7 instantneo',
     'QUERO MEU AGENTE DE IA'
   ],
   'formulario': [
-    'Pronto para escalar seu negócio',
-    'Diagnóstico gratuito do seu negócio',
-    'Estratégia personalizada de crescimento',
-    'RECEBER DIAGNÓSTICO GRATUITO'
+    'Pronto para escalar seu negcio',
+    'Diagnstico gratuito do seu negcio',
+    'Estratgia personalizada de crescimento',
+    'RECEBER DIAGN✕TICO GRATUITO'
   ]
 };
 
@@ -189,28 +189,28 @@ const EXPECTED_CONTENT = {
 // MAIN
 // ============================================
 function main() {
-  console.log('═══════════════════════════════════════════');
-  console.log('  ASCENSÃO COMPANY — HASH VERIFICATION');
+  console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
+  console.log('  ASCENSO COMPANY  HASH VERIFICATION');
   console.log('  (Content-based comparison)');
-  console.log('═══════════════════════════════════════════\n');
+  console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP\n');
 
   // 1. Read and normalize local HTML
-  console.log('📄 Reading local HTML...');
+  console.log('= Reading local HTML...');
   const localHTML = fs.readFileSync(LOCAL_FILE, 'utf8');
   console.log(`   File size: ${localHTML.length.toLocaleString()} bytes\n`);
 
   const normalized = normalizeHTML(localHTML);
   const normalizedHash = sha256(normalized);
   
-  console.log(`🔒 Normalized HTML Hash: ${normalizedHash}\n`);
+  console.log(`= Normalized HTML Hash: ${normalizedHash}\n`);
 
   // 2. Extract text content
   const textContent = extractTextContent(normalized);
   const textHash = sha256(textContent);
-  console.log(`📝 Text Content Hash: ${textHash}\n`);
+  console.log(`= Text Content Hash: ${textHash}\n`);
 
   // 3. Section-by-section content verification
-  console.log('🔍 Section-by-section content verification:\n');
+  console.log('= Section-by-section content verification:\n');
   
   const sections = extractSections(localHTML);
   let allPassed = true;
@@ -232,21 +232,21 @@ function main() {
     });
 
     if (missing.length === 0) {
-      console.log(`   ✅ #${sectionId} — All ${expectedStrings.length} content checks passed`);
+      console.log(`    #${sectionId}  All ${expectedStrings.length} content checks passed`);
     } else {
-      console.log(`   ⚠️  #${sectionId} — ${missing.length} missing:`);
-      missing.forEach(m => console.log(`      ❌ "${m}"`));
+      console.log(`     #${sectionId}  ${missing.length} missing:`);
+      missing.forEach(m => console.log(`      L "${m}"`));
     }
   }
 
   console.log(`\n   Score: ${passedChecks}/${totalChecks} content checks passed (${Math.round(passedChecks/totalChecks*100)}%)\n`);
 
   // 4. Verify assets
-  console.log('📦 Verifying local assets...');
+  console.log('= Verifying local assets...');
   const assetsDir = path.join(__dirname, 'assets');
   const expectedAssets = [
     { name: 'founders-Butfy_T2.jpeg', minSize: 100000 },
-    { name: 'logo-ascensao-DQUHq5Wm.png', minSize: 200000 },
+    { name: 'ascensao-company-logo.svg', minSize: 100000 },
     { name: 'whatsapp-3d-CHW-Y5IC.webp', minSize: 50000 }
   ];
 
@@ -256,16 +256,16 @@ function main() {
     if (fs.existsSync(filePath)) {
       const stats = fs.statSync(filePath);
       const sizeOk = stats.size >= asset.minSize;
-      console.log(`   ${sizeOk ? '✅' : '⚠️ '} ${asset.name} (${(stats.size / 1024).toFixed(1)} KB)`);
+      console.log(`   ${sizeOk ? '' : ' '} ${asset.name} (${(stats.size / 1024).toFixed(1)} KB)`);
       if (!sizeOk) assetsOk = false;
     } else {
-      console.log(`   ❌ ${asset.name} — MISSING!`);
+      console.log(`   L ${asset.name}  MISSING!`);
       assetsOk = false;
     }
   });
 
   // 5. Verify files exist
-  console.log('\n📁 Verifying project files...');
+  console.log('\n= Verifying project files...');
   const projectFiles = [
     'legacy/original-site/index.html',
     'legacy/original-site/style.css',
@@ -276,17 +276,17 @@ function main() {
   ];
   projectFiles.forEach(f => {
     const exists = fs.existsSync(path.join(__dirname, f));
-    console.log(`   ${exists ? '✅' : '❌'} ${f}`);
+    console.log(`   ${exists ? '' : 'L'} ${f}`);
   });
 
   // 6. Final verdict
-  console.log('\n═══════════════════════════════════════════');
+  console.log('\nPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
   if (allPassed && assetsOk) {
-    console.log('  ✅ CLONE VERIFIED — All content matches!');
+    console.log('   CLONE VERIFIED  All content matches!');
   } else {
-    console.log('  ⚠️  CLONE HAS DIVERGENCES — Review above');
+    console.log('    CLONE HAS DIVERGENCES  Review above');
   }
-  console.log('═══════════════════════════════════════════');
+  console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
 }
 
 main();

@@ -42,7 +42,7 @@
   function drawParticle(p) {
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(220, 38, 38, ${p.opacity})`;
+    ctx.fillStyle = `rgba(61, 158, 255, ${p.opacity})`;
     ctx.fill();
   }
 
@@ -51,7 +51,7 @@
     ctx.beginPath();
     ctx.moveTo(p1.x, p1.y);
     ctx.lineTo(p2.x, p2.y);
-    ctx.strokeStyle = `rgba(220, 38, 38, ${opacity})`;
+    ctx.strokeStyle = `rgba(61, 158, 255, ${opacity})`;
     ctx.lineWidth = 0.5;
     ctx.stroke();
   }

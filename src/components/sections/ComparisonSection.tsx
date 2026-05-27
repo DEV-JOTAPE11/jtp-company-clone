@@ -94,7 +94,7 @@ export function ComparisonSection(): JSX.Element {
                 <span id="total-counter">R$ 0</span><span className="text-lg text-muted-foreground">/mês</span>
               </p>
               <p className="text-muted-foreground text-sm mb-6">Com a Ascensão, você tem uma assessoria completa que atua em todas essas frentes por um investimento muito menor.</p>
-              <button className="btn-cta glow-red w-full">QUERO MAIS INFORMAÇÕES</button>
+              <button className="btn-cta glow-blue w-full">QUERO MAIS INFORMAÇÕES</button>
             </div>
           </div>
         </div>
@@ -102,3 +102,4 @@ export function ComparisonSection(): JSX.Element {
     </>
   );
 }
+

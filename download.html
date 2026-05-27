@@ -8,12 +8,13 @@
     @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
     :root {
-      --bg: #0a0a0a;
-      --card: #111;
-      --border: #262626;
-      --primary: #dc2626;
-      --fg: #fafafa;
-      --muted: #a3a3a3;
+      --bg: #05070B;
+      --card: #071427;
+      --border: #1C2E40;
+      --primary: #2680D9;
+      --primary-hover: #3D9EFF;
+      --fg: #EBF3FF;
+      --muted: #AAB8D4;
       --green: #22c55e;
     }
 
@@ -87,7 +88,7 @@
       flex-shrink: 0;
     }
 
-    .file-icon.html { background: #dc262630; color: var(--primary); }
+    .file-icon.html { background: #2680D930; color: var(--primary); }
     .file-icon.css { background: #3b82f630; color: #3b82f6; }
     .file-icon.js { background: #eab30830; color: #eab308; }
     .file-icon.img { background: #22c55e30; color: var(--green); }
@@ -127,7 +128,7 @@
       gap: 0.75rem;
       width: 100%;
       padding: 1rem 2rem;
-      background: linear-gradient(135deg, var(--primary), #991b1b);
+      background: linear-gradient(to right, var(--primary), var(--primary-hover));
       color: white;
       border: none;
       border-radius: 12px;
@@ -142,7 +143,7 @@
 
     .btn-download:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(220, 38, 38, 0.4);
+      box-shadow: 0 8px 30px rgba(61, 158, 255, 0.4);
     }
 
     .btn-download:disabled {
@@ -180,7 +181,7 @@
       font-size: 0.7rem;
       color: var(--muted);
       word-break: break-all;
-      background: #0a0a0a;
+      background: #05070B;
       padding: 0.75rem;
       border-radius: 6px;
       margin-top: 1rem;
@@ -241,8 +242,8 @@
           <span class="file-size" id="size-founders">—</span>
         </li>
         <li>
-          <div class="file-icon img">IMG</div>
-          <span class="file-name">legacy/original-site/assets/logo-ascensao-DQUHq5Wm.png</span>
+          <div class="file-icon img">SVG</div>
+          <span class="file-name">legacy/original-site/assets/ascensao-company-logo.svg</span>
           <span class="file-size" id="size-logo">—</span>
         </li>
         <li>
@@ -287,7 +288,7 @@
       { path: 'legacy/original-site/particles.js', sizeId: 'size-particles' },
       { path: 'legacy/original-site/animations.js', sizeId: 'size-animations' },
       { path: 'legacy/original-site/assets/founders-Butfy_T2.jpeg', sizeId: 'size-founders', binary: true },
-      { path: 'legacy/original-site/assets/logo-ascensao-DQUHq5Wm.png', sizeId: 'size-logo', binary: true },
+      { path: 'legacy/original-site/assets/ascensao-company-logo.svg', sizeId: 'size-logo' },
       { path: 'legacy/original-site/assets/whatsapp-3d-CHW-Y5IC.webp', sizeId: 'size-whatsapp', binary: true }
     ];
 

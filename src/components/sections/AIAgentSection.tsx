@@ -110,10 +110,11 @@ export function AIAgentSection(): JSX.Element {
           </div>
       
           <div className="text-center scroll-reveal">
-            <button className="btn-cta glow-red">QUERO MEU AGENTE DE IA</button>
+            <button className="btn-cta glow-blue">QUERO MEU AGENTE DE IA</button>
           </div>
         </div>
       </section>
     </>
   );
 }
+
