@@ -199,6 +199,14 @@ h1, h2, h3, h4 {
   background-clip: text;
 }
 
+.hero-text-gradient {
+  background: linear-gradient(92deg, #f4fbff 0%, #7eb8ff 34%, #004efd 68%, #b9d7ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 18px rgba(0, 78, 253, 0.34));
+}
+
 /* ============================================
    ANIMATIONS / KEYFRAMES
    ============================================ */
@@ -695,6 +703,20 @@ select {
     linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
   mask-composite: intersect;
   -webkit-mask-composite: source-in;
+}
+
+.hero-mobile-equation {
+  font-size: clamp(0.82rem, 3.55vw, 1rem);
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.hero-mobile-cta {
+  width: 100%;
+  max-width: 21rem;
+  padding: 0.75rem 1rem;
+  font-size: clamp(0.78rem, 3.45vw, 0.95rem);
+  white-space: nowrap;
 }
 
 /* ============================================
