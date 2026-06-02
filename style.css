@@ -814,6 +814,18 @@ select {
   -webkit-mask-composite: source-in;
 }
 
+@media (min-width: 1024px) {
+  .hero-desktop-content {
+    align-items: flex-start;
+    padding-top: 4.5rem;
+  }
+
+  .hero-desktop-media {
+    top: 4.5rem;
+    bottom: auto;
+  }
+}
+
 .hero-image-mask-mobile {
   mask-image: 
     linear-gradient(transparent 0%, black 10%, black 85%, transparent 100%),

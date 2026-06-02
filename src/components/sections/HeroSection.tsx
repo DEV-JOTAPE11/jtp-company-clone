@@ -10,7 +10,7 @@ export function HeroSection(): JSX.Element {
             <img
               src="/assets/founders-Butfy_T2.svg"
               alt="Natanael Almeida e Daniel Marques - Fundadores da Ascensão Company"
-              className="absolute right-0 bottom-0 h-auto object-contain brightness-125 contrast-110 hero-image-mask"
+              className="absolute right-0 bottom-0 h-auto object-contain brightness-125 contrast-110 hero-image-mask hero-desktop-media"
               style={{ width: "75%" }}
             />
 
@@ -69,7 +69,7 @@ export function HeroSection(): JSX.Element {
             ></div>
           </div>
 
-          <div className="relative z-10 max-w-7xl mx-auto w-full min-h-screen flex items-center px-12 py-20">
+          <div className="relative z-10 max-w-7xl mx-auto w-full min-h-screen flex items-center px-12 py-20 hero-desktop-content">
             <div style={{ maxWidth: "42rem" }}>
               <div className="mb-6 flex justify-center">
                 <img
