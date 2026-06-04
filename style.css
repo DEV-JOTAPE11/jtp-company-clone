@@ -3,8 +3,7 @@
    Reconstruído a partir do site remoto
    ============================================ */
 
-/* Google Fonts — Space Grotesk (font-display) */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+/* Google Fonts — Space Grotesk (loaded via index.html <link> for non-blocking) */
 
 /* ============================================
    CSS VARIABLES / DESIGN TOKENS
@@ -745,6 +744,17 @@ select {
 /* WhatsApp drop shadow */
 .drop-shadow-whatsapp {
   filter: drop-shadow(0 0 12px rgba(37, 211, 102, 0.5));
+}
+
+/* WhatsApp float bob animation (replaces JS rAF loop) */
+@keyframes whatsapp-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.whatsapp-float img {
+  animation: whatsapp-bob 2s ease-in-out infinite;
+  will-change: transform;
 }
 
 /* Footer grid pattern */

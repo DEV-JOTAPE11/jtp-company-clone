@@ -163,23 +163,6 @@ export function useSiteInteractions(): void {
       });
     };
 
-    const initWhatsAppFloat = () => {
-      const whatsappImage = document.querySelector<HTMLImageElement>(".whatsapp-float img");
-      if (!whatsappImage) return;
-
-      let animationFrameId = 0;
-      let time = 0;
-
-      const animate = () => {
-        time += 0.03;
-        const offsetY = Math.sin(time) * 5;
-        whatsappImage.style.transform = `translateY(${offsetY}px)`;
-        animationFrameId = window.requestAnimationFrame(animate);
-      };
-
-      animationFrameId = window.requestAnimationFrame(animate);
-      cleanups.push(() => window.cancelAnimationFrame(animationFrameId));
-    };
 
     const initCtaButtons = () => {
       const ctaButtons = document.querySelectorAll<HTMLButtonElement>(".btn-cta");
@@ -237,7 +220,6 @@ export function useSiteInteractions(): void {
     initSmoothScroll();
     initMobileMenu();
     initCounter();
-    initWhatsAppFloat();
     initCtaButtons();
     initForm();
 

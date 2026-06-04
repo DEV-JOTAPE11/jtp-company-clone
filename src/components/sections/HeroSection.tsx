@@ -12,6 +12,9 @@ export function HeroSection(): JSX.Element {
               alt="Natanael Almeida e Daniel Marques - Fundadores da Ascensão Company"
               className="absolute right-0 bottom-0 h-auto object-contain brightness-125 contrast-110 hero-image-mask hero-desktop-media"
               style={{ width: "75%" }}
+              width={1200}
+              height={1200}
+              fetchPriority="high"
             />
 
             <div
@@ -77,6 +80,8 @@ export function HeroSection(): JSX.Element {
                   alt="Ascensão Company"
                   className="h-auto object-contain mx-auto"
                   style={{ width: "min(520px, 80vw)" }}
+                  width={520}
+                  height={180}
                 />
               </div>
 
@@ -153,6 +158,9 @@ export function HeroSection(): JSX.Element {
               src="/assets/founders-Butfy_T2.svg"
               alt="Natanael Almeida e Daniel Marques - Fundadores da Ascensão Company"
               className="relative w-full h-auto object-contain brightness-125 contrast-110 hero-image-mask-mobile"
+              width={800}
+              height={800}
+              fetchPriority="high"
             />
             <div
               className="absolute flex justify-center text-xs z-10"
@@ -194,6 +202,8 @@ export function HeroSection(): JSX.Element {
                   alt="Ascensão Company"
                   className="h-auto object-contain mx-auto"
                   style={{ width: "min(320px, 82vw)" }}
+                  width={320}
+                  height={110}
                 />
               </div>
               <h1 className="text-3xl sm:text-4xl font-bold font-display leading-tight mb-4 scroll-reveal">
